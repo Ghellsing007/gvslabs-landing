@@ -2,128 +2,136 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
+interface Project {
+  id: string
+  title: string
+  description: string
+  image: string
+  category: string
+}
 
 const categories = [
   { id: "all", label: "Todos" },
   { id: "web", label: "Desarrollo Web" },
-  { id: "mobile", label: "Apps Móviles" },
-  { id: "ecommerce", label: "E-commerce" },
-  { id: "automation", label: "Automatización" },
+  { id: "mobile", label: "Aplicaciones Móviles" },
+  { id: "desktop", label: "Software Desktop" },
 ]
 
-const projects = [
+const projects: Project[] = [
   {
-    id: 1,
-    title: "Portal Corporativo Moderno",
-    description: "Diseño y desarrollo de un portal web corporativo con panel de administración personalizado.",
-    image: "/placeholder.svg?height=600&width=800",
+    id: "1",
+    title: "E-commerce Platform",
+    description: "Plataforma de comercio electrónico con integración de pagos y gestión de inventario.",
+    image: "/placeholder.svg?height=400&width=600",
     category: "web",
   },
   {
-    id: 2,
-    title: "App de Gestión de Inventario",
-    description: "Aplicación móvil para la gestión de inventario con sincronización en tiempo real.",
-    image: "/placeholder.svg?height=600&width=800",
+    id: "2",
+    title: "App de Delivery",
+    description: "Aplicación móvil para pedidos y seguimiento de entregas en tiempo real.",
+    image: "/placeholder.svg?height=400&width=600",
     category: "mobile",
   },
   {
-    id: 3,
-    title: "Tienda Online de Productos Artesanales",
-    description: "Plataforma e-commerce con pasarela de pagos y gestión de envíos integrada.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "ecommerce",
-  },
-  {
-    id: 4,
-    title: "Sistema de Automatización de Marketing",
-    description: "Herramienta para automatizar campañas de email marketing y seguimiento de clientes.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "automation",
-  },
-  {
-    id: 5,
-    title: "Plataforma de Reservas para Restaurantes",
-    description: "Sistema web para gestionar reservas y pedidos online para restaurantes.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "web",
-  },
-  {
-    id: 6,
-    title: "App de Delivery para Supermercados",
-    description: "Aplicación móvil para realizar pedidos de supermercado con entrega a domicilio.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "mobile",
+    id: "3",
+    title: "Sistema de Gestión",
+    description: "Software de gestión empresarial con módulos de contabilidad y recursos humanos.",
+    image: "/placeholder.svg?height=400&width=600",
+    category: "desktop",
   },
 ]
+
+const ProjectCard = ({ project }: { project: Project }) => (
+  <motion.div
+    key={project.id}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    viewport={{ once: true }}
+    className="group overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-md hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-105"
+  >
+    <div className="relative aspect-video overflow-hidden">
+      <Image
+        src={project.image || "/placeholder.svg"}
+        alt={project.title}
+        width={800}
+        height={600}
+        className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+      />
+    </div>
+    <div className="p-4 sm:p-6">
+      <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">{project.title}</h3>
+      <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">{project.description}</p>
+    </div>
+  </motion.div>
+)
+
+const PortfolioHeader = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    viewport={{ once: true }}
+    className="flex flex-col items-center justify-center space-y-4 text-center px-4 sm:px-6"
+  >
+    <div className="inline-block rounded-2xl bg-indigo-600/10 dark:bg-indigo-400/10 px-3 sm:px-4 py-1 sm:py-2 text-sm text-indigo-600 dark:text-indigo-400 transition-all duration-300 hover:bg-indigo-600/20 dark:hover:bg-indigo-400/20">
+      Portafolio
+    </div>
+    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-slate-900 dark:text-white">
+      Nuestros proyectos destacados
+    </h2>
+    <p className="max-w-[700px] text-sm sm:text-base md:text-lg text-slate-700 dark:text-slate-300">
+      Descubre algunos de nuestros trabajos más recientes y cómo hemos ayudado a nuestros clientes a alcanzar sus objetivos.
+    </p>
+  </motion.div>
+)
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-16 md:py-24">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="inline-block rounded-lg bg-blue-600/10 dark:bg-blue-400/10 px-3 py-1 text-sm text-blue-600 dark:text-blue-400">
-            Nuestro Portafolio
-          </div>
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-slate-900 dark:text-white">
-            Proyectos destacados
-          </h2>
-          <p className="max-w-[700px] text-slate-700 dark:text-slate-300 md:text-lg">
-            Explora algunos de nuestros trabajos más recientes y descubre cómo hemos ayudado a nuestros clientes a
-            alcanzar sus objetivos.
-          </p>
-        </div>
-        <Tabs defaultValue="all" className="mt-12">
-          <div className="flex justify-center">
-            <TabsList className="mb-8">
-              {categories.map((category) => (
-                <TabsTrigger key={category.id} value={category.id}>
-                  {category.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </div>
-          {categories.map((category) => (
-            <TabsContent key={category.id} value={category.id} className="mt-0">
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {projects
-                  .filter((project) => category.id === "all" || project.category === category.id)
-                  .map((project, index) => (
-                    <motion.div
-                      key={project.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="group overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow"
-                    >
-                      <div className="relative aspect-video overflow-hidden">
-                        <Image
-                          src={project.image || "/placeholder.svg"}
-                          alt={project.title}
-                          width={800}
-                          height={600}
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">{project.title}</h3>
-                        <p className="mt-2 text-slate-600 dark:text-slate-400">{project.description}</p>
-                        <div className="mt-4">
-                          <Button variant="outline" size="sm">
-                            Ver detalles
-                          </Button>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
-        <div className="mt-12 text-center">
-          <Button>Ver más proyectos</Button>
-        </div>
+    <section id="portfolio" className="min-h-screen py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900">
+      <div className="container px-4 md:px-6 mx-auto">
+        <PortfolioHeader />
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <Tabs defaultValue="all" className="mt-8 sm:mt-12">
+            <div className="flex justify-center">
+              <TabsList className="mb-6 sm:mb-8 p-1 bg-slate-100 dark:bg-slate-800 rounded-2xl shadow-md overflow-x-auto">
+                {categories.map((category) => (
+                  <TabsTrigger 
+                    key={category.id} 
+                    value={category.id}
+                    className="rounded-xl transition-all duration-300 ease-in-out hover:bg-indigo-600/10 dark:hover:bg-indigo-400/10 data-[state=active]:bg-indigo-600 data-[state=active]:text-white dark:data-[state=active]:bg-indigo-400 text-sm sm:text-base whitespace-nowrap"
+                  >
+                    {category.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
+            {categories.map((category) => (
+              <TabsContent key={category.id} value={category.id} className="mt-0">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+                >
+                  {projects
+                    .filter((project) => category.id === "all" || project.category === category.id)
+                    .map((project) => (
+                      <ProjectCard key={project.id} project={project} />
+                    ))}
+                </motion.div>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </motion.div>
       </div>
     </section>
   )
