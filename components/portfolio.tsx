@@ -101,7 +101,7 @@ export default function Portfolio() {
         >
           <Tabs defaultValue="all" className="mt-8 sm:mt-12">
             <div className="flex justify-center">
-              <TabsList className="mb-6 sm:mb-8 p-1 bg-slate-100 dark:bg-slate-800 rounded-2xl shadow-md overflow-x-auto">
+              <TabsList className="mb-6 sm:mb-8 p-1 bg-slate-100 dark:bg-slate-800 rounded-2xl shadow-md flex flex-wrap justify-center gap-2">
                 {categories.map((category) => (
                   <TabsTrigger 
                     key={category.id} 

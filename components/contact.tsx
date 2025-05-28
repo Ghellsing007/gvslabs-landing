@@ -19,17 +19,17 @@ const contactInfo: ContactInfo[] = [
   {
     icon: <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600 dark:text-indigo-400 mt-0.5" aria-hidden="true" />,
     title: "Dirección",
-    content: "Av. Tecnológica 123, Ciudad Innovación, CP 12345",
+    content: "Santo Domingo, República Dominicana",
   },
   {
     icon: <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600 dark:text-indigo-400 mt-0.5" aria-hidden="true" />,
     title: "Email",
-    content: "info@gvservices.com",
+    content: "gvservicex@gmail.com",
   },
   {
     icon: <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600 dark:text-indigo-400 mt-0.5" aria-hidden="true" />,
     title: "Teléfono",
-    content: "+1 (555) 123-4567",
+    content: "+1 (829) 872-5551",
   },
 ]
 
