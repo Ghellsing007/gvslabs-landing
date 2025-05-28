@@ -8,6 +8,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { useToast } from "@/components/ui/use-toast"
+import emailjs from "@emailjs/browser"
 
 interface ContactInfo {
   icon: React.ReactNode
@@ -72,6 +74,8 @@ const ContactInfoCard = () => (
 )
 
 const ContactForm = () => {
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -84,10 +88,43 @@ const ContactForm = () => {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Aquí iría la lógica para enviar el formulario
-    console.log(formData)
+    setIsSubmitting(true)
+  
+    // 🔐 Validar variables de entorno
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+  
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("❌ Faltan variables de entorno para EmailJS")
+      toast({
+        title: "Error interno",
+        description: "Faltan configuraciones necesarias para enviar el mensaje.",
+        variant: "destructive",
+      })
+      setIsSubmitting(false)
+      return
+    }
+  
+    try {
+      await emailjs.send(serviceId, templateId, formData, publicKey)
+      toast({
+        title: "Mensaje enviado",
+        description: "Gracias por contactarnos. Te responderemos pronto.",
+      })
+      setFormData({ name: "", email: "", phone: "", message: "" })
+    } catch (error) {
+      console.error("❌ Error al enviar el mensaje:", error)
+      toast({
+        title: "Error",
+        description: "No se pudo enviar el mensaje. Inténtalo de nuevo.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -193,8 +230,9 @@ const ContactForm = () => {
                 type="submit" 
                 className="w-full rounded-xl bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg text-sm sm:text-base"
                 aria-label="Enviar mensaje de contacto"
+                disabled={isSubmitting}
               >
-                Enviar mensaje
+                {isSubmitting ? "Enviando..." : "Enviar mensaje"}
               </Button>
             </motion.div>
           </form>
