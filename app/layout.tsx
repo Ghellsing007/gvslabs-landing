@@ -3,7 +3,7 @@ import "@/app/globals.css"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/header"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -64,7 +64,12 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   robots: "index, follow",
-  viewport: "width=device-width, initial-scale=1.0",
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#007BFF",
 }
 
 export default function RootLayout({
