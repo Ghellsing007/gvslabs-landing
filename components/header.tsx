@@ -3,23 +3,23 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useTheme } from "next-themes"
-import { Menu, X, Moon, Sun, Globe } from "lucide-react"
+import { Menu, X, Moon, Sun, Globe, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const navigation = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Products", href: "#products" },
-  { name: "Portfolio", href: "#portfolio" },
-  { name: "Testimonials", href: "#testimonials" },
-  { name: "Blog", href: "#blog" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/#about" },
+  { name: "Services", href: "/#services" },
+  { name: "Products", href: "/#products" },
+  { name: "Portfolio", href: "/#portfolio" },
+  { name: "Testimonials", href: "/#testimonials" },
+  { name: "Blog", href: "/#blog" },
+  { name: "Contact", href: "/#contact" },
 ]
 
 const Logo = () => (
-  <Link href="#" className="-m-1.5 p-1.5">
+  <Link href="/" className="-m-1.5 p-1.5">
     <span className="sr-only">GVServices</span>
     <div className="flex items-center">
       <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-500 dark:from-blue-400 dark:to-emerald-300 bg-clip-text text-transparent">
@@ -30,7 +30,7 @@ const Logo = () => (
 )
 
 const NavigationLinks = () => (
-  <div className="hidden md:flex md:items-center md:gap-x-6">
+  <div className="hidden lg:flex lg:gap-x-8">
     {navigation.map((item) => (
       <Link
         key={item.name}
@@ -147,9 +147,12 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                   )}
                 </Button>
               </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white">
-                Request a Consultation
-              </Button>
+              <Link href="/proyecto" passHref>
+                <Button className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white w-full">
+                  Solicitar una Consulta
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -209,8 +212,14 @@ export default function Header() {
         <div className="hidden md:flex md:items-center md:gap-x-6">
           <LanguageToggle />
           <ThemeToggle />
-          <Button className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white">
-            Request a Consultation
+          <Button
+            className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white"
+            asChild
+          >
+            <Link href="/proyecto">
+              Solicitar una Consulta
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </Button>
         </div>
       </nav>

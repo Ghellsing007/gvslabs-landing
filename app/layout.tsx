@@ -8,8 +8,8 @@ import type { Metadata } from "next"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "GVServices Landing",
-  description: "Servicios digitales de alta calidad para impulsar tu negocio",
+  title: "GVServices - Soluciones Tecnológicas",
+  description: "Transformando ideas en soluciones tecnológicas innovadoras",
   keywords: "desarrollo web, aplicaciones móviles, software empresarial, servicios digitales",
   authors: [{ name: "GVServices" }],
   creator: "GVServices",
@@ -80,7 +80,12 @@ export default function RootLayout({
         <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange={false}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <Header />
           <main className="min-h-screen">
             {children}

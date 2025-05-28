@@ -11,7 +11,7 @@ const products = [
     title: "Plataforma de Agendas Online",
     description:
       "Sistema de gestión de citas y reservas para optimizar la atención al cliente y administrar horarios de forma eficiente.",
-    link: "#",
+    link: "https://agendly-saas.netlify.app/",
   },
   {
     icon: <Car className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />,
@@ -71,9 +71,16 @@ export default function Products() {
                   </CardDescription>
                 </CardContent>
                 <CardFooter>
-                  <Button variant="outline" className="w-full">
-                    Más información
-                  </Button>
+                  <a
+                    href={product.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full"
+                  >
+                    <Button variant="outline" className="w-full">
+                      Más información
+                    </Button>
+                  </a>
                 </CardFooter>
               </Card>
             </motion.div>

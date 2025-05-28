@@ -10,6 +10,7 @@ interface Project {
   description: string
   image: string
   category: string
+  link: string
 }
 
 const categories = [
@@ -22,10 +23,11 @@ const categories = [
 const projects: Project[] = [
   {
     id: "1",
-    title: "E-commerce Platform",
-    description: "Plataforma de comercio electrónico con integración de pagos y gestión de inventario.",
-    image: "/placeholder.svg?height=400&width=600",
+    title: "Agendly-Saas",
+    description: "Plataforma de agendas online para optimizar la atención al cliente y administrar horarios de forma eficiente.",
+    image: "/agendly-saas.webp",
     category: "web",
+    link: "https://agendly-saas.netlify.app/",
   },
   {
     id: "2",
@@ -33,6 +35,7 @@ const projects: Project[] = [
     description: "Aplicación móvil para pedidos y seguimiento de entregas en tiempo real.",
     image: "/placeholder.svg?height=400&width=600",
     category: "mobile",
+    link: "#",
   },
   {
     id: "3",
@@ -40,32 +43,45 @@ const projects: Project[] = [
     description: "Software de gestión empresarial con módulos de contabilidad y recursos humanos.",
     image: "/placeholder.svg?height=400&width=600",
     category: "desktop",
+    link: "#",
+  },
+  {
+    id: "4",
+    title: "E-commerce Platform",
+    description: "Plataforma de comercio electrónico con integración de pagos y gestión de inventario.",
+    image: "/placeholder.svg?height=400&width=600",
+    category: "web",
+    link: "#",
   },
 ]
 
 const ProjectCard = ({ project }: { project: Project }) => (
-  <motion.div
+  <motion.a
+    href={project.link}
+    target="_blank"
+    rel="noopener noreferrer"
     key={project.id}
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
-    className="group overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-md hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-105"
+    className="block group overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-md hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-105"
   >
     <div className="relative aspect-video overflow-hidden">
       <Image
-        src={project.image || "/placeholder.svg"}
+        src={project.image}
         alt={project.title}
-        width={800}
-        height={600}
+        fill
         className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        priority={project.id === "1"}
       />
     </div>
     <div className="p-4 sm:p-6">
       <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">{project.title}</h3>
       <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">{project.description}</p>
     </div>
-  </motion.div>
+  </motion.a>
 )
 
 const PortfolioHeader = () => (
@@ -103,8 +119,8 @@ export default function Portfolio() {
             <div className="flex justify-center">
               <TabsList className="mb-6 sm:mb-8 p-1 bg-slate-100 dark:bg-slate-800 rounded-2xl shadow-md flex flex-wrap justify-center gap-2">
                 {categories.map((category) => (
-                  <TabsTrigger 
-                    key={category.id} 
+                  <TabsTrigger
+                    key={category.id}
                     value={category.id}
                     className="rounded-xl transition-all duration-300 ease-in-out hover:bg-indigo-600/10 dark:hover:bg-indigo-400/10 data-[state=active]:bg-indigo-600 data-[state=active]:text-white dark:data-[state=active]:bg-indigo-400 text-sm sm:text-base whitespace-nowrap"
                   >
