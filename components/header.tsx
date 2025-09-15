@@ -119,13 +119,13 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
               ))}
             </div>
             <div className="py-6 flex flex-col gap-4">
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Language</span>
                 <Button variant="ghost" size="sm" onClick={() => setLanguage(language === "en" ? "es" : "en")} className="flex items-center gap-2">
                   <Globe className="h-4 w-4" />
                   <span>{language === "en" ? "English" : "Español"}</span>
                 </Button>
-              </div>
+              </div> */}
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Theme</span>
                 <Button
@@ -210,7 +210,7 @@ export default function Header() {
         </div>
         <NavigationLinks />
         <div className="hidden md:flex md:items-center md:gap-x-6">
-          <LanguageToggle />
+         {/*  <LanguageToggle /> */}
           <ThemeToggle />
           <Button
             className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white"
