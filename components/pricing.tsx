@@ -10,61 +10,88 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, Star } from "lucide-react";
+import { Check, Star, ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 const hostingPlans = [
   {
     name: "Starter",
-    price: "$10-15",
+    price: "$5",
     period: "/mes",
-    description: "1 sitio web estático o blog.",
+    description: "Para proyectos pequeños y sitios de presentación.",
     features: [
-      "1 sitio web estático o blog",
-      "1 base de datos",
-      "SSL + backups semanales",
-      "Soporte básico",
+      "1 sitio estático o blog",
+      "Base de datos básica incluida",
+      "SSL + Backups semanales",
+      "Subdominio bajo *.gvscloud.com incluido",
+      "Soporte por email/chat",
+      "Ideal para landing pages, portfolios, blogs",
     ],
     popular: false,
+    technicalSpecs: "Hasta 0.5 vCPU / 512 MB RAM / 1 GB DB",
   },
   {
     name: "Business",
-    price: "$25-40",
+    price: "$15",
     period: "/mes",
-    description: "1-3 apps (Node.js, Python, etc.).",
+    description: "Para negocios en crecimiento con apps dinámicas.",
     features: [
-      "1-3 apps (Node.js, Python, etc.)",
+      "1–2 aplicaciones web (Node.js, Python, PHP, etc.)",
       "Base de datos dedicada",
-      "Backups diarios",
-      "Dominio + email básico",
+      "SSL + Backups diarios",
+      "Subdominio bajo *.gvscloud.com incluido",
+      "Dominio y correo básico incluidos",
+      "Soporte prioritario",
+      "Ideal para tiendas pequeñas, sistemas internos o apps MVP",
     ],
     popular: true,
+    technicalSpecs: "Hasta 1 vCPU / 1 GB RAM / 2 GB DB",
   },
   {
     name: "Scale",
-    price: "$60-90",
+    price: "$35",
     period: "/mes",
-    description: "5+ apps o APIs.",
+    description: "Para startups, SaaS y APIs con tráfico moderado.",
     features: [
-      "5+ apps o APIs",
-      "Monitoreo 24/7",
-      "Backups automáticos",
-      "Soporte prioritario",
+      "Hasta 5 aplicaciones o APIs",
+      "Monitoreo básico 24/7",
+      "SSL + Backups automáticos",
+      "Subdominio bajo *.gvscloud.com incluido",
+      "Soporte premium",
+      "Ideal para marketplaces, SaaS en crecimiento, APIs B2B",
     ],
     popular: false,
+    technicalSpecs: "Hasta 2 vCPU / 2 GB RAM / 5 GB DB",
   },
   {
     name: "Odoo Cloud",
-    price: "$70-100",
+    price: "$55",
     period: "/mes",
-    description: "Instancia de Odoo Community.",
+    description: "ERP/CRM en la nube para optimizar operaciones.",
     features: [
-      "Instancia de Odoo Community",
-      "1 módulo básico incluido",
-      "1GB+ DB",
-      "Soporte funcional",
+      "Instancia optimizada de Odoo Community",
+      "Incluye módulo base (ventas o inventario)",
+      "Backups diarios + Seguridad avanzada",
+      "Soporte funcional incluido",
+      "El precio varía según módulos, integraciones y volumen de datos",
     ],
     popular: false,
+    technicalSpecs: "Desde 1 vCPU / 1 GB RAM (escalable)",
+  },
+  {
+    name: "Custom Cloud",
+    price: "A Medida",
+    period: "",
+    description: "Para empresas que requieren más capacidad o alta demanda.",
+    features: [
+      "Escalamos vCPU, RAM, almacenamiento y bases de datos",
+      "Ajustamos los recursos según su presupuesto y proyección",
+      "Soporte y SLA personalizados",
+      "Ideal para apps con alto tráfico, big data, integraciones pesadas",
+    ],
+    popular: false,
+    technicalSpecs: "Recursos personalizados según necesidades",
   },
 ];
 
@@ -77,23 +104,33 @@ const PricingHeader = () => (
     className="flex flex-col items-center justify-center space-y-4 text-center px-4 sm:px-6"
   >
     <div className="inline-block rounded-2xl bg-indigo-600/10 dark:bg-indigo-400/10 px-3 sm:px-4 py-1 sm:py-2 text-sm text-indigo-600 dark:text-indigo-400 transition-all duration-300 hover:bg-indigo-600/20 dark:hover:bg-indigo-400/20">
-      Planes y Precios
+      💎 Planes de Hosting y Cloud by GVS Labs
     </div>
     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-slate-900 dark:text-white">
-      Encuentra el plan perfecto para tu negocio
+      Rápidos, seguros y con soporte humano
     </h2>
-    <p className="max-w-[700px] text-sm sm:text-base md:text-lg text-slate-700 dark:text-slate-300">
-      Precios transparentes y flexibles adaptados a tus necesidades.
+    <p className="max-w-[900px] text-sm sm:text-base md:text-lg text-slate-700 dark:text-slate-300">
+      Incluyen SSL, backups automáticos y optimización para apps web modernas. Perfectos para PYMEs, startups y profesionales que quieren ahorrar en AWS/GCP pero con un servicio confiable.
     </p>
   </motion.div>
 );
 
-const HostingSection = () => (
-  <div className="space-y-8">
-    <h3 className="text-2xl font-bold text-center text-slate-900 dark:text-white">
-      Hosting
-    </h3>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+const HostingSection = () => {
+  const [showTechnical, setShowTechnical] = useState<Record<string, boolean>>({});
+
+  const toggleTechnical = (planName: string) => {
+    setShowTechnical(prev => ({
+      ...prev,
+      [planName]: !prev[planName]
+    }));
+  };
+
+  return (
+    <div className="space-y-8">
+      <h3 className="text-2xl font-bold text-center text-slate-900 dark:text-white">
+        Hosting
+      </h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {hostingPlans.map((plan, index) => (
         <motion.div
           key={index}
@@ -143,6 +180,30 @@ const HostingSection = () => (
                   </li>
                 ))}
               </ul>
+              <motion.div
+                initial={{ height: 0 }}
+                animate={{ height: showTechnical[plan.name] ? 'auto' : 0 }}
+                className="overflow-hidden"
+              >
+                <div className="mt-4 p-3 bg-slate-100 dark:bg-slate-700 rounded-md">
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    {plan.technicalSpecs}
+                  </p>
+                </div>
+              </motion.div>
+              <div className="text-center mt-4">
+                <button
+                  onClick={() => toggleTechnical(plan.name)}
+                  className="text-sm text-indigo-600 dark:text-indigo-400 hover:underline flex items-center justify-center gap-1 mx-auto"
+                >
+                  Ver detalles técnicos
+                  {showTechnical[plan.name] ? (
+                    <ChevronUp className="h-4 w-4" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4" />
+                  )}
+                </button>
+              </div>
             </CardContent>
             <CardFooter>
               <Button
@@ -158,6 +219,147 @@ const HostingSection = () => (
       ))}
     </div>
   </div>
+  );
+};
+
+const KeyDifferentiatorsSection = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    viewport={{ once: true }}
+    className="text-center space-y-6"
+  >
+    <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+      💎 Diferenciadores Clave frente a Hosting Tradicional
+    </h3>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
+      <div className="flex items-start gap-3">
+        <Check className="h-5 w-5 text-green-500 mt-0.5" />
+        <p className="text-sm text-slate-700 dark:text-slate-300">
+          Precios más bajos que AWS, DigitalOcean o Render
+        </p>
+      </div>
+      <div className="flex items-start gap-3">
+        <Check className="h-5 w-5 text-green-500 mt-0.5" />
+        <p className="text-sm text-slate-700 dark:text-slate-300">
+          Sin costos ocultos por tráfico, ancho de banda ni transferencias
+        </p>
+      </div>
+      <div className="flex items-start gap-3">
+        <Check className="h-5 w-5 text-green-500 mt-0.5" />
+        <p className="text-sm text-slate-700 dark:text-slate-300">
+          Despliegue rápido y fácil, incluso para apps modernas (Node.js, Python, etc.)
+        </p>
+      </div>
+      <div className="flex items-start gap-3">
+        <Check className="h-5 w-5 text-green-500 mt-0.5" />
+        <p className="text-sm text-slate-700 dark:text-slate-300">
+          Incluye monitoreo básico y backups (que en otros servicios se paga aparte)
+        </p>
+      </div>
+      <div className="flex items-start gap-3">
+        <Check className="h-5 w-5 text-green-500 mt-0.5" />
+        <p className="text-sm text-slate-700 dark:text-slate-300">
+          Soporte humano real
+        </p>
+      </div>
+      <div className="flex items-start gap-3">
+        <Check className="h-5 w-5 text-green-500 mt-0.5" />
+        <p className="text-sm text-slate-700 dark:text-slate-300">
+          Opción de migrar a recursos dedicados a medida que creces
+        </p>
+      </div>
+    </div>
+  </motion.div>
+);
+
+const DomainsAndServicesSection = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    viewport={{ once: true }}
+    className="space-y-8"
+  >
+    <h3 className="text-2xl font-bold text-center text-slate-900 dark:text-white">
+      🌎 Dominios y Servicios Asociados
+    </h3>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <Card className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm">
+        <CardHeader>
+          <CardTitle className="text-lg text-slate-900 dark:text-white">
+            🌟 Wildcard Domain (*.gvscloud.com)
+          </CardTitle>
+          <CardDescription className="text-slate-600 dark:text-slate-400">
+            Subdominios ilimitados para tus apps y demos
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
+            <li>• Gratis los primeros 3 meses</li>
+            <li>• Luego $1.5-2.5/mes según uso</li>
+            <li>• SSL automático incluido</li>
+            <li>• Ideal para demos</li>
+          </ul>
+        </CardContent>
+      </Card>
+      <Card className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm">
+        <CardHeader>
+          <CardTitle className="text-lg text-slate-900 dark:text-white">
+            📧 Correo Corporativo
+          </CardTitle>
+          <CardDescription className="text-slate-600 dark:text-slate-400">
+            Email profesional con Zimbra o alternativas
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
+            <li>• 1-5 buzones: +$5/mes</li>
+            <li>• 6-20 buzones: +$15/mes</li>
+            <li>• Anti-spam y webmail incluido</li>
+            <li>• Configuración gestionada</li>
+          </ul>
+        </CardContent>
+      </Card>
+      <Card className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm">
+        <CardHeader>
+          <CardTitle className="text-lg text-slate-900 dark:text-white">
+            🔒 Servicios Adicionales
+          </CardTitle>
+          <CardDescription className="text-slate-600 dark:text-slate-400">
+            Complementos para potenciar tu presencia
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
+            <li>• Gestión de dominios: costo dominio + fee</li>
+            <li>• SSL Premium (EV/OV): $15-20/año</li>
+            <li>• Backups externos: $3-5/mes</li>
+            <li>• WAF/CDN (Cloudflare): $3-10/mes</li>
+          </ul>
+        </CardContent>
+      </Card>
+      <Card className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm">
+        <CardHeader>
+          <CardTitle className="text-lg text-slate-900 dark:text-white">
+            ⚡ Notas Importantes
+          </CardTitle>
+          <CardDescription className="text-slate-600 dark:text-slate-400">
+            Restricciones y beneficios
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
+            <li>• Subdominio limitado a apps en plataforma</li>
+            <li>• Dominios propios requieren registro adicional</li>
+            <li>• Soporte incluido en configuración inicial</li>
+            <li>• Tú te encargas de todo el setup</li>
+          </ul>
+        </CardContent>
+      </Card>
+    </div>
+  </motion.div>
 );
 
 const developmentProjects = [
@@ -310,8 +512,10 @@ export default function Pricing() {
     >
       <div className="container px-4 md:px-6">
         <PricingHeader />
-        <div className="mt-12 space-y-16">
+        <div className="mt-16 space-y-16">
           <HostingSection />
+          <KeyDifferentiatorsSection />
+          <DomainsAndServicesSection />
           <DevelopmentSection />
           <MaintenanceSection />
         </div>
