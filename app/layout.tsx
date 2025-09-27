@@ -8,32 +8,32 @@ import type { Metadata, Viewport } from "next"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "GVServices - Soluciones Tecnológicas",
+  title: "GVSlabs - Soluciones Tecnológicas",
   description: "Transformando ideas en soluciones tecnológicas innovadoras",
   keywords: "desarrollo web, aplicaciones móviles, software empresarial, servicios digitales",
-  authors: [{ name: "GVServices" }],
-  creator: "GVServices",
-  publisher: "GVServices",
+  authors: [{ name: "GVSlabs" }],
+  creator: "GVSlabs",
+  publisher: "GVSlabs",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://gvservices.com"),
+  metadataBase: new URL("https://gvslabs.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "GVServices Landing",
+    title: "GVSlabs Landing",
     description: "Servicios digitales de alta calidad para impulsar tu negocio",
-    url: "https://gvservices.com",
-    siteName: "GVServices",
+    url: "https://gvslabs.com",
+    siteName: "GVSlabs",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "GVServices",
+        alt: "GVSlabs",
       },
     ],
     locale: "es_ES",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GVServices - Soluciones Tecnológicas Innovadoras",
+    title: "GVSlabs - Soluciones Tecnológicas Innovadoras",
     description: "Desarrollo de software, optimización de procesos y soluciones digitales hechas para ti",
     images: ["/twitter-image.jpg"],
   },
