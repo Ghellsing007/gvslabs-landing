@@ -199,7 +199,7 @@ const MobileMenu = ({
 
   return (
     <div className="fixed inset-0 z-[60] bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
-      <div className="fixed inset-y-0 right-0 z-[60] w-full overflow-y-auto bg-white dark:bg-slate-900 px-6 py-6 sm:max-w-sm shadow-2xl">
+      <div className="fixed top-16 bottom-0 right-0 z-[60] w-full overflow-y-auto bg-white dark:bg-slate-900 px-6 py-6 sm:max-w-sm shadow-2xl">
         <div className="flex items-center justify-between">
           <Logo />
           <button
