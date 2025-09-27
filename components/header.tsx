@@ -20,10 +20,10 @@ const navigation = [
 
 const Logo = () => (
   <Link href="/" className="-m-1.5 p-1.5">
-    <span className="sr-only">GVServices</span>
+    <span className="sr-only">GVSlabs</span>
     <div className="flex items-center">
       <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-500 dark:from-blue-400 dark:to-emerald-300 bg-clip-text text-transparent">
-        GVServices
+        GVSlabs
       </span>
     </div>
   </Link>

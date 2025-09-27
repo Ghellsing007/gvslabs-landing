@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="space-y-4">
             <Link href="#" className="flex items-center">
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-500 dark:from-blue-400 dark:to-emerald-300 bg-clip-text text-transparent">
-                GVServices
+                GVSlabs
               </span>
             </Link>
             <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -160,7 +160,7 @@ export default function Footer() {
         </div>
         <div className="mt-8 border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs text-slate-600 dark:text-slate-400">
-            © {new Date().getFullYear()} GVServices. Todos los derechos reservados.
+            © {new Date().getFullYear()} GVSlabs. Todos los derechos reservados.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-4">
             <Link

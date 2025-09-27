@@ -26,7 +26,7 @@ const contactInfo: ContactInfo[] = [
   {
     icon: <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600 dark:text-indigo-400 mt-0.5" aria-hidden="true" />,
     title: "Email",
-    content: "gvservicex@gmail.com",
+    content: "admin@gvslabs.cloud",
   },
   {
     icon: <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600 dark:text-indigo-400 mt-0.5" aria-hidden="true" />,
