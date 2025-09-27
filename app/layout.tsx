@@ -3,6 +3,7 @@ import "@/app/globals.css"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/header"
+import WhatsAppFloat from "@/components/whatsapp-float"
 import type { Metadata, Viewport } from "next"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -95,6 +96,7 @@ export default function RootLayout({
           <main className="min-h-screen">
             {children}
           </main>
+          <WhatsAppFloat />
         </ThemeProvider>
       </body>
     </html>

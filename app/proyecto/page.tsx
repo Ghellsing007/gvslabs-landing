@@ -1,4 +1,4 @@
-import ProjectBrief from "@/components/project-brief"
+import ProjectForm from "@/components/project-form"
 
 export const metadata = {
   title: "Cuéntanos sobre tu proyecto - GVServices",
@@ -9,7 +9,7 @@ export const metadata = {
 export default function ProyectoPage() {
   return (
     <main className="min-h-screen pt-24">
-      <ProjectBrief />
+      <ProjectForm />
     </main>
   )
 }

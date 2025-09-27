@@ -133,7 +133,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  href="#"
+                  href="/terms"
                   className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
                 >
                   Términos y Condiciones
@@ -141,7 +141,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/privacy"
                   className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
                 >
                   Política de Privacidad
@@ -149,7 +149,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/cookies"
                   className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
                 >
                   Política de Cookies
@@ -164,19 +164,19 @@ export default function Footer() {
           </p>
           <div className="mt-4 md:mt-0 flex space-x-4">
             <Link
-              href="#"
+              href="/terms"
               className="text-xs text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
             >
               Términos
             </Link>
             <Link
-              href="#"
+              href="/privacy"
               className="text-xs text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
             >
               Privacidad
             </Link>
             <Link
-              href="#"
+              href="/cookies"
               className="text-xs text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
             >
               Cookies

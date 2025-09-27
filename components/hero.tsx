@@ -28,7 +28,7 @@ export default function Hero() {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
                 <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl xl:text-6xl/none font-bold tracking-tighter text-slate-900 dark:text-white leading-tight">
                   Impulsamos tu negocio con{" "}
-                  <span className="text-blue-600 dark:text-blue-400">soluciones tecnológicas</span> innovadoras
+                  <span className="text-blue-600 dark:text-blue-400">soluciones tecnológicas confiables</span> y alojadas en nuestra nube
                 </h1>
               </motion.div>
               <motion.div
@@ -45,18 +45,27 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-col gap-3 xs:gap-2 xs:flex-row"
+              className="grid grid-cols-1 xs:grid-cols-3 gap-3"
             >
               <Button
-                className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white w-full xs:w-auto min-h-[44px]"
+                className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white w-full min-h-[44px]"
                 asChild
               >
-                <Link href="/proyecto">
-                  Solicitar una Consulta
+                <Link href="/portfolio">
+                  Solicitar Demo
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button variant="outline" className="w-full xs:w-auto min-h-[44px]">Conoce nuestros servicios</Button>
+              <Button variant="outline" className="w-full min-h-[44px]" asChild>
+                <Link href="/pricing">
+                  Cotizar Hosting
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full min-h-[44px]" asChild>
+                <Link href="/proyecto">
+                  Implementar proyecto
+                </Link>
+              </Button>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
