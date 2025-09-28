@@ -1,16 +1,21 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-
-const ClientLayout = dynamic(() => import('./client-layout'), { ssr: false })
+import { useEffect, useState } from 'react'
+import ClientLayout from './client-layout'
 
 interface ClientWrapperProps {
   children: React.ReactNode
 }
 
 export default function ClientWrapper({ children }: ClientWrapperProps) {
-  if (typeof window === 'undefined') {
-    return <div>{children}</div> // Renderizar solo children durante prerendering
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return <>{children}</>
   }
 
   return <ClientLayout>{children}</ClientLayout>
