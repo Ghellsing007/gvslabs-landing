@@ -4,7 +4,22 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun, Globe, ArrowRight, Server, Code2, Database, Zap, Shield, Wrench, Mail, Phone } from "lucide-react";
+import {
+  Menu,
+  X,
+  Moon,
+  Sun,
+  Globe,
+  ArrowRight,
+  Server,
+  Code2,
+  Database,
+  Zap,
+  Shield,
+  Wrench,
+  Mail,
+  Phone,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
@@ -123,7 +138,9 @@ const MegaMenu = ({
                 transition={{ delay: index * 0.1, duration: 0.3 }}
                 className="group block p-6 rounded-xl hover:bg-gradient-to-br hover:from-blue-50 hover:to-indigo-50 dark:hover:from-slate-800 dark:hover:to-slate-700 transition-all duration-300 shadow-sm hover:shadow-lg border border-transparent hover:border-blue-200 dark:hover:border-slate-600"
               >
-                <div className="mb-3 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
+                <div className="mb-3 group-hover:scale-110 transition-transform duration-300">
+                  {item.icon}
+                </div>
                 <h3 className="font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 mb-2">
                   {item.title}
                 </h3>
@@ -233,14 +250,22 @@ const MobileMenu = ({
                 </h3>
                 <div className="space-y-2">
                   <a
-                    href="https://coolify.gvslabs.cloud/"
+                    href="https://dokploy.gvslabs.cloud/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-2 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                     onClick={onClose}
                   >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                     <span>Área de cliente</span>
                   </a>
@@ -271,7 +296,9 @@ const MobileMenu = ({
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                    onClick={() =>
+                      setTheme(theme === "dark" ? "light" : "dark")
+                    }
                     className="flex items-center gap-2"
                   >
                     {theme === "dark" ? (
@@ -356,13 +383,21 @@ export default function Header() {
             <div></div>
             <div className="flex items-center space-x-6">
               <a
-                href="https://coolify.gvslabs.cloud/"
+                href="https://dokploy.gvslabs.cloud/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold transition-colors duration-200"
               >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span>Área de cliente</span>
               </a>
@@ -384,9 +419,7 @@ export default function Header() {
                 className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white text-xs px-3 py-1"
                 asChild
               >
-                <Link href="/proyecto">
-                  Solicitar Consulta
-                </Link>
+                <Link href="/proyecto">Solicitar Consulta</Link>
               </Button>
             </div>
           </div>
@@ -417,8 +450,7 @@ export default function Header() {
           isOpen={isMegaMenuOpen}
           onClose={() => setIsMegaMenuOpen(false)}
         />
-        <div className="hidden md:flex md:items-center md:gap-x-4">
-        </div>
+        <div className="hidden md:flex md:items-center md:gap-x-4"></div>
       </nav>
       <MobileMenu
         isOpen={mobileMenuOpen}
