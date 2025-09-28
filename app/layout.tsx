@@ -1,10 +1,7 @@
 import type React from "react";
 import "@/app/globals.css";
-import { Inter } from "next/font/google";
-import ClientWrapper from "@/components/client-wrapper";
+import ClientLayout from "@/components/client-layout";
 import type { Metadata, Viewport } from "next";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "GVSlabs - Soluciones Tecnológicas",
@@ -79,14 +76,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
-      <head>
-        <meta name="theme-color" content="#007BFF" />
-        <meta name="msapplication-TileColor" content="#007BFF" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
-      </head>
-      <body className={inter.className}>
-        <ClientWrapper>{children}</ClientWrapper>
+    <html lang="es">
+      <body>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
