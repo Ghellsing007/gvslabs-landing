@@ -1,5 +1,5 @@
 import type React from "react";
-import "@/app/globals.css";
+import "./globals.css";
 import ClientLayout from "@/components/client-layout";
 import type { Metadata, Viewport } from "next";
 
