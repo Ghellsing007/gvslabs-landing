@@ -1,17 +1,16 @@
-import type React from "react"
-import "@/app/globals.css"
-import { Inter } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
-import Header from "@/components/header"
-import WhatsAppFloat from "@/components/whatsapp-float"
-import type { Metadata, Viewport } from "next"
+import type React from "react";
+import "@/app/globals.css";
+import { Inter } from "next/font/google";
+import ClientWrapper from "@/components/client-wrapper";
+import type { Metadata, Viewport } from "next";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "GVSlabs - Soluciones Tecnológicas",
   description: "Transformando ideas en soluciones tecnológicas innovadoras",
-  keywords: "desarrollo web, aplicaciones móviles, software empresarial, servicios digitales",
+  keywords:
+    "desarrollo web, aplicaciones móviles, software empresarial, servicios digitales",
   authors: [{ name: "GVSlabs" }],
   creator: "GVSlabs",
   publisher: "GVSlabs",
@@ -43,7 +42,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "GVSlabs - Soluciones Tecnológicas Innovadoras",
-    description: "Desarrollo de software, optimización de procesos y soluciones digitales hechas para ti",
+    description:
+      "Desarrollo de software, optimización de procesos y soluciones digitales hechas para ti",
     images: ["/twitter-image.jpg"],
   },
   icons: {
@@ -65,18 +65,18 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   robots: "index, follow",
-}
+};
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: "#007BFF",
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
@@ -86,19 +86,8 @@ export default function RootLayout({
         <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Header />
-          <main className="min-h-screen pt-16 md:pt-26">
-            {children}
-          </main>
-          <WhatsAppFloat />
-        </ThemeProvider>
+        <ClientWrapper>{children}</ClientWrapper>
       </body>
     </html>
-  )
+  );
 }

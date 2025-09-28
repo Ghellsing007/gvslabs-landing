@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 export default function CookiesPage() {
   return (
     <main className="min-h-screen py-16 md:py-24">

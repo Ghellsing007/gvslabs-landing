@@ -1,5 +1,7 @@
 import ProjectForm from "@/components/project-form"
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: "Cuéntanos sobre tu proyecto - GVServices",
   description:
