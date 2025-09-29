@@ -215,8 +215,8 @@ const MobileMenu = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
-      <div className="fixed top-16 bottom-0 right-0 z-[60] w-full overflow-y-auto bg-white dark:bg-slate-900 px-6 py-6 sm:max-w-sm shadow-2xl">
+    <div className="fixed inset-0 z-[9999] bg-black/50 dark:bg-black/70 backdrop-blur-sm">
+      <div className="fixed top-0 right-0 h-screen w-80 overflow-y-auto bg-white dark:bg-slate-900 px-6 py-6 shadow-2xl">
         <div className="flex items-center justify-between">
           <Logo />
           <button
@@ -268,6 +268,16 @@ const MobileMenu = ({
                       />
                     </svg>
                     <span>Área de cliente</span>
+                  </a>
+                  <a
+                    href="https://odoo.gvslabs.cloud/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    onClick={onClose}
+                  >
+                    <Database className="w-4 h-4" />
+                    <span>Acceso Odoo</span>
                   </a>
                   <a
                     href="https://zimbra1.mail.ovh.net/"
@@ -367,6 +377,17 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header
       className={cn(
@@ -402,10 +423,20 @@ export default function Header() {
                 <span>Área de cliente</span>
               </a>
               <a
-                href="https://zimbra1.mail.ovh.net/"
-                className="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200"
+                href="https://odoo.gvslabs.cloud/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold transition-colors duration-200"
               >
-                Webmail
+                <Database className="w-4 h-4" />
+                <span>Acceso Odoo</span>
+              </a>
+              <a
+                href="https://zimbra1.mail.ovh.net/"
+                className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold transition-colors duration-200"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Webmail</span>
               </a>
               <a
                 href="/#contact"
