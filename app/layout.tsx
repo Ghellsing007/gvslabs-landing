@@ -2,6 +2,7 @@ import type React from "react";
 import "./globals.css";
 import ClientLayout from "@/components/client-layout";
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "GVSlabs - Soluciones Tecnológicas",
@@ -77,6 +78,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2109167817151815"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
       <body>
         <ClientLayout>{children}</ClientLayout>
       </body>
