@@ -72,15 +72,10 @@ const megaMenuItems = [
 
 const Logo = () => (
   <Link href="/" className="-m-1.5 p-1.5 group">
-    <span className="sr-only">GVSlabs</span>
-    <div className="flex items-center space-x-2">
-      <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-        <span className="text-white font-bold text-sm">GV</span>
-      </div>
-      <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-500 dark:from-blue-400 dark:to-emerald-300 bg-clip-text text-transparent group-hover:from-blue-700 group-hover:to-emerald-600 transition-all duration-200">
-        GVSlabs
-      </span>
-    </div>
+    <span className="sr-only">GVSLABS</span>
+    <span className="text-2xl font-bold text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-200 tracking-wide">
+      GVSLABS
+    </span>
   </Link>
 );
 
@@ -269,7 +264,7 @@ const MobileMenu = ({
                     </svg>
                     <span>Área de cliente</span>
                   </a>
-                  <a
+                  {/* <a
                     href="https://odoo.gvslabs.cloud/"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -278,7 +273,7 @@ const MobileMenu = ({
                   >
                     <Database className="w-4 h-4" />
                     <span>Acceso Odoo</span>
-                  </a>
+                  </a> */}
                   <a
                     href="https://zimbra1.mail.ovh.net/"
                     className="flex items-center space-x-2 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
@@ -422,7 +417,7 @@ export default function Header() {
                 </svg>
                 <span>Área de cliente</span>
               </a>
-              <a
+              {/* <a
                 href="https://odoo.gvslabs.cloud/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -430,7 +425,7 @@ export default function Header() {
               >
                 <Database className="w-4 h-4" />
                 <span>Acceso Odoo</span>
-              </a>
+              </a> */}
               <a
                 href="https://zimbra1.mail.ovh.net/"
                 className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold transition-colors duration-200"
