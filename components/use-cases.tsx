@@ -4,14 +4,15 @@ import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Rocket, Package, ShoppingCart, Building, Bot } from "lucide-react"
 import { ReactNode } from "react"
+import { IconRenderer } from "@/components/icon-renderer"
 
 interface UseCase {
-  icon: ReactNode
+  icon?: string | ReactNode
   title: string
   description: string
 }
 
-const useCases: UseCase[] = [
+const staticUseCases: UseCase[] = [
   {
     icon: <Rocket className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />,
     title: "SaaS y Startups",
@@ -47,10 +48,18 @@ const UseCaseCard = ({ useCase, index }: { useCase: UseCase; index: number }) =>
     transition={{ duration: 0.5, delay: index * 0.1 }}
     viewport={{ once: true }}
   >
-    <Card className="h-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-md hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-105 rounded-2xl">
+    <Card className="h-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-md hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-105 rounded-2xl group">
       <CardHeader>
-        <div className="mb-2 transition-transform duration-300 ease-in-out group-hover:scale-110">{useCase.icon}</div>
-        <CardTitle className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">{useCase.title}</CardTitle>
+        <div className="mb-2 transition-transform duration-300 ease-in-out group-hover:scale-110">
+          {typeof useCase.icon === 'string' ? (
+            <IconRenderer iconName={useCase.icon} className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+          ) : (
+            useCase.icon
+          )}
+        </div>
+        <CardTitle className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
+          {useCase.title}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <CardDescription className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
@@ -81,7 +90,9 @@ const UseCasesHeader = () => (
   </motion.div>
 )
 
-export default function UseCases() {
+export default function UseCases({ initialUseCases = [] }: { initialUseCases?: any[] }) {
+  const displayUseCases = initialUseCases.length > 0 ? initialUseCases : staticUseCases;
+
   return (
     <section id="use-cases" className="py-12 md:py-16 bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900">
       <div className="container px-4 md:px-6 mx-auto">
@@ -93,11 +104,11 @@ export default function UseCases() {
           viewport={{ once: true }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12"
         >
-          {useCases.map((useCase, index) => (
+          {displayUseCases.map((useCase, index) => (
             <UseCaseCard key={index} useCase={useCase} index={index} />
           ))}
         </motion.div>
       </div>
     </section>
   )
-}
+}

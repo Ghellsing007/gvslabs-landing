@@ -6,7 +6,11 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Code, BarChart, Zap } from "lucide-react"
 import Link from "next/link"
 
-export default function Hero() {
+interface HeroProps {
+  config?: any;
+}
+
+export default function Hero({ config }: HeroProps) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -14,6 +18,18 @@ export default function Hero() {
   }, [])
 
   if (!mounted) return null
+
+  const heroData = config?.hero || {
+    title: "Impulsamos tu negocio con ",
+    subtitle: "soluciones tecnológicas confiables",
+    description: "Desarrollo de software, optimización de procesos y soluciones digitales hechas para ti",
+    ctas: [
+      { label: "Solicitar Demo", href: "/portfolio", variant: "primary" },
+      { label: "Cotizar Hosting", href: "/pricing", variant: "outline" },
+      { label: "Implementar proyecto", href: "/proyecto", variant: "outline" },
+    ],
+    badges: ["Desarrollo a medida", "Optimización de procesos", "Soluciones rápidas"]
+  };
 
   return (
     <section id="home" className="relative pt-20 xs:pt-24 sm:pt-28 md:pt-32 pb-16 xs:pb-20 sm:pb-24 md:pb-28 overflow-hidden">
@@ -27,8 +43,8 @@ export default function Hero() {
             <div className="space-y-2">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
                 <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl xl:text-6xl/none font-bold tracking-tighter text-slate-900 dark:text-white leading-tight">
-                  Impulsamos tu negocio con{" "}
-                  <span className="text-blue-600 dark:text-blue-400">soluciones tecnológicas confiables</span> y alojadas en nuestra nube
+                  {heroData.title}
+                  <span className="text-blue-600 dark:text-blue-400">{heroData.subtitle}</span>
                 </h1>
               </motion.div>
               <motion.div
@@ -37,7 +53,7 @@ export default function Hero() {
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
                 <p className="max-w-[600px] text-sm xs:text-base sm:text-lg md:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
-                  Desarrollo de software, optimización de procesos y soluciones digitales hechas para ti
+                  {heroData.description}
                 </p>
               </motion.div>
             </div>
@@ -47,25 +63,19 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="grid grid-cols-1 xs:grid-cols-3 gap-3"
             >
-              <Button
-                className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white w-full min-h-[44px]"
-                asChild
-              >
-                <Link href="/portfolio">
-                  Solicitar Demo
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="outline" className="w-full min-h-[44px]" asChild>
-                <Link href="/pricing">
-                  Cotizar Hosting
-                </Link>
-              </Button>
-              <Button variant="outline" className="w-full min-h-[44px]" asChild>
-                <Link href="/proyecto">
-                  Implementar proyecto
-                </Link>
-              </Button>
+              {heroData.ctas?.map((cta: any, idx: number) => (
+                <Button
+                  key={idx}
+                  variant={cta.variant === "primary" ? "default" : "outline"}
+                  className={cta.variant === "primary" ? "bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white w-full min-h-[44px]" : "w-full min-h-[44px]"}
+                  asChild
+                >
+                  <Link href={cta.href}>
+                    {cta.label}
+                    {cta.variant === "primary" && <ArrowRight className="ml-2 h-4 w-4" />}
+                  </Link>
+                </Button>
+              ))}
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -73,18 +83,17 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div className="flex flex-col xs:flex-row items-start xs:items-center space-y-2 xs:space-y-0 xs:space-x-4 text-sm text-slate-600 dark:text-slate-400">
-                <div className="flex items-center space-x-1">
-                  <Code className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                  <span>Desarrollo a medida</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <BarChart className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>Optimización de procesos</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <Zap className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                  <span>Soluciones rápidas</span>
-                </div>
+                {heroData.badges?.map((badge: string, idx: number) => {
+                  const Icons = [Code, BarChart, Zap];
+                  const Icon = Icons[idx % Icons.length];
+                  const colors = ["text-blue-600 dark:text-blue-400", "text-emerald-600 dark:text-emerald-400", "text-amber-600 dark:text-amber-400"];
+                  return (
+                    <div key={idx} className="flex items-center space-x-1">
+                      <Icon className={`h-4 w-4 ${colors[idx % colors.length]}`} />
+                      <span>{badge}</span>
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
           </div>

@@ -1,10 +1,12 @@
 import Portfolio from "@/components/portfolio"
+import { gvslabsApi } from "@/lib/api"
 
+export default async function PortfolioPage() {
+  const projects = await gvslabsApi.getProjects().catch(() => []);
 
-export default function PortfolioPage() {
   return (
     <main className="min-h-screen">
-      <Portfolio />
+      <Portfolio initialProjects={projects} />
     </main>
   )
 }

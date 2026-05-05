@@ -5,42 +5,47 @@ import { Star } from "lucide-react"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-const testimonials = [
-  {
-    name: "María González",
-    role: "CEO, Innovatech",
-    content:
-      "GVServices transformó completamente nuestros procesos internos con su sistema de gestión. La eficiencia de nuestro equipo aumentó en un 40% desde la implementación.",
-    avatar: "/placeholder.svg?height=40&width=40",
-    rating: 5,
-  },
+interface Testimonial {
+  _id?: string;
+  name: string;
+  role: string;
+  content: string;
+  avatar?: string;
+  rating: number;
+}
+
+interface TestimonialsProps {
+  initialTestimonials?: Testimonial[];
+}
+
+const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
     name: "Carlos Rodríguez",
-    role: "Director de Operaciones, LogisTech",
-    content:
-      "La aplicación móvil que desarrollaron para nuestra flota de transporte nos permitió optimizar rutas y reducir costos operativos significativamente. Excelente trabajo.",
-    avatar: "/placeholder.svg?height=40&width=40",
+    role: "CEO en TechFlow",
+    content: "La implementación de nuestra infraestructura en la nube con GVS Labs fue impecable. Su equipo demostró un conocimiento técnico excepcional.",
     rating: 5,
   },
   {
-    name: "Laura Martínez",
-    role: "Propietaria, Boutique Elegance",
-    content:
-      "Nuestra tienda online ha incrementado las ventas en un 75% desde que GVServices la rediseñó. La experiencia de usuario es excepcional y el proceso de compra muy intuitivo.",
-    avatar: "/placeholder.svg?height=40&width=40",
-    rating: 4,
-  },
-  {
-    name: "Javier Morales",
-    role: "Gerente de Marketing, TechSolutions",
-    content:
-      "El sistema de automatización de marketing que implementaron ha revolucionado nuestra estrategia digital. Ahora podemos gestionar campañas de forma más eficiente.",
-    avatar: "/placeholder.svg?height=40&width=40",
+    name: "Ana Martínez",
+    role: "Directora de Operaciones en Global Logistics",
+    content: "Gracias a su solución de automatización, hemos reducido nuestros tiempos operativos en un 40%. Una inversión que valió totalmente la pena.",
     rating: 5,
   },
-]
+];
 
-export default function Testimonials() {
+export default function Testimonials({ initialTestimonials = [] }: TestimonialsProps) {
+  // Map API data to component structure if needed
+  const mappedTestimonials = initialTestimonials.map((t: any) => ({
+    _id: t._id,
+    name: t.name,
+    role: t.role || t.company || "Cliente",
+    content: t.message || t.content,
+    avatar: t.photo || t.avatar,
+    rating: t.rating || 5,
+  }));
+
+  const testimonials = mappedTestimonials.length > 0 ? mappedTestimonials : DEFAULT_TESTIMONIALS;
+
   return (
     <section id="testimonials" className="py-16 md:py-24 bg-slate-50 dark:bg-slate-900/50">
       <div className="container px-4 md:px-6">
@@ -58,7 +63,7 @@ export default function Testimonials() {
         <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-2">
           {testimonials.map((testimonial, index) => (
             <motion.div
-              key={index}
+              key={testimonial._id || index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}

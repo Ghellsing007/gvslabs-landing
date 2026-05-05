@@ -8,55 +8,14 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { Code, Database, Globe, Lock, Zap, Smartphone } from "lucide-react";
-import { ReactNode } from "react";
+import { IconRenderer } from "@/components/icon-renderer";
 
 interface Service {
-  icon: ReactNode;
+  _id?: string;
+  icon: string;
   title: string;
   description: string;
 }
-
-const services: Service[] = [
-  {
-    icon: <Globe className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />,
-    title: "Infraestructura & Hosting",
-    description:
-      "Hosting de sitios/apps, APIs, Odoo. Migración incluida. Infraestructura simplificada, más barata que AWS/Azure.",
-  },
-  {
-    icon: <Code className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />,
-    title: "Desarrollo Web & Apps",
-    description:
-      "Landing pages, dashboards, apps SaaS. Entrega rápida, escalabilidad y hosting propio (llave en mano).",
-  },
-  {
-    icon: <Database className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />,
-    title: "Sistemas Empresariales (Odoo)",
-    description:
-      "Instalación Odoo Community, módulos personalizados. Ahorro en licencias, control de datos.",
-  },
-  {
-    icon: <Zap className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />,
-    title: "Automatización & APIs",
-    description:
-      "Integración pagos, bots, dashboards BI. Optimización de operaciones y reducción de errores.",
-  },
-  {
-    icon: <Lock className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />,
-    title: "Consultoría DevOps",
-    description:
-      "Configuración entornos, CI/CD, monitoreo. Rápida implementación y menor costo operativo.",
-  },
-  {
-    icon: (
-      <Smartphone className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
-    ),
-    title: "Soporte & Mantenimiento",
-    description:
-      "Mantenimiento apps, backups, actualizaciones. Tranquilidad y soporte constante.",
-  },
-];
 
 const ServiceCard = ({
   service,
@@ -66,7 +25,7 @@ const ServiceCard = ({
   index: number;
 }) => (
   <motion.div
-    key={index}
+    key={service._id || index}
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -75,7 +34,10 @@ const ServiceCard = ({
     <Card className="h-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-md hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-105 rounded-2xl">
       <CardHeader>
         <div className="mb-2 transition-transform duration-300 ease-in-out group-hover:scale-110">
-          {service.icon}
+          <IconRenderer 
+            iconName={service.icon} 
+            className="h-6 w-6 text-indigo-600 dark:text-indigo-400" 
+          />
         </div>
         <CardTitle className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
           {service.title}
@@ -111,7 +73,46 @@ const ServicesHeader = () => (
   </motion.div>
 );
 
-export default function Services() {
+const DEFAULT_SERVICES: Service[] = [
+  {
+    icon: "Cloud",
+    title: "Infraestructura Cloud",
+    description: "Diseño y despliegue de infraestructuras escalables en AWS, Azure y Google Cloud.",
+  },
+  {
+    icon: "Code",
+    title: "Desarrollo de Software",
+    description: "Creación de aplicaciones web y móviles a medida con las últimas tecnologías.",
+  },
+  {
+    icon: "ShieldCheck",
+    title: "Ciberseguridad",
+    description: "Protección integral de datos y sistemas contra amenazas digitales externas.",
+  },
+  {
+    icon: "Cpu",
+    title: "Inteligencia Artificial",
+    description: "Integración de modelos de IA para optimizar procesos y análisis de datos.",
+  },
+  {
+    icon: "Database",
+    title: "Gestión de Datos",
+    description: "Estrategias de Big Data y bases de datos para una toma de decisiones informada.",
+  },
+  {
+    icon: "Zap",
+    title: "Automatización",
+    description: "Optimización de flujos de trabajo mediante herramientas de automatización inteligente.",
+  },
+];
+
+interface ServicesProps {
+  initialServices?: Service[];
+}
+
+export default function Services({ initialServices = [] }: ServicesProps) {
+  const services = initialServices.length > 0 ? initialServices : DEFAULT_SERVICES;
+
   return (
     <section
       id="services"
@@ -127,7 +128,7 @@ export default function Services() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12"
         >
           {services.map((service, index) => (
-            <ServiceCard key={index} service={service} index={index} />
+            <ServiceCard key={service._id || index} service={service} index={index} />
           ))}
         </motion.div>
       </div>

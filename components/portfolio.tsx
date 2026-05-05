@@ -114,7 +114,23 @@ const PortfolioHeader = () => (
   </motion.div>
 )
 
-export default function Portfolio() {
+interface PortfolioProps {
+  initialProjects?: any[]
+}
+
+export default function Portfolio({ initialProjects = [] }: PortfolioProps) {
+  // Map API data to component structure
+  const mappedProjects = initialProjects.map((p: any) => ({
+    id: p._id,
+    title: p.title,
+    description: p.description,
+    image: p.thumbnail || p.image,
+    category: p.category,
+    link: p.demoUrl || p.link,
+  }));
+
+  const displayProjects = mappedProjects.length > 0 ? mappedProjects : projects;
+
   return (
     <section id="portfolio" className="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900">
       <div className="container px-4 xs:px-5 sm:px-6 mx-auto">
@@ -126,8 +142,8 @@ export default function Portfolio() {
           viewport={{ once: true }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12"
         >
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {displayProjects.map((project) => (
+            <ProjectCard key={project.id} project={project as Project} />
           ))}
         </motion.div>
       </div>

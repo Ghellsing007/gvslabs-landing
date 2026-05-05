@@ -18,92 +18,94 @@ import { useToast } from "@/components/ui/use-toast";
 import emailjs from "@emailjs/browser";
 import Confetti from "react-confetti";
 
-interface ContactInfo {
-  icon: React.ReactNode;
-  title: string;
-  content: string;
-}
+const ContactInfoCard = ({ config }: { config?: any }) => {
+  const contactData = config?.contact || {
+    address: "Santo Domingo, República Dominicana",
+    email: "admin@gvslabs.cloud",
+    phone: "+1 (829) 872-5551",
+  };
 
-const contactInfo: ContactInfo[] = [
-  {
-    icon: (
-      <MapPin
-        className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600 dark:text-indigo-400 mt-0.5"
-        aria-hidden="true"
-      />
-    ),
-    title: "Dirección",
-    content: "Santo Domingo, República Dominicana",
-  },
-  {
-    icon: (
-      <Mail
-        className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600 dark:text-indigo-400 mt-0.5"
-        aria-hidden="true"
-      />
-    ),
-    title: "Email",
-    content: "admin@gvslabs.cloud",
-  },
-  {
-    icon: (
-      <Phone
-        className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600 dark:text-indigo-400 mt-0.5"
-        aria-hidden="true"
-      />
-    ),
-    title: "Teléfono",
-    content: "+1 (829) 872-5551",
-  },
-];
+  const dynamicContactInfo = [
+    {
+      icon: (
+        <MapPin
+          className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600 dark:text-indigo-400 mt-0.5"
+          aria-hidden="true"
+        />
+      ),
+      title: "Dirección",
+      content: contactData.address,
+    },
+    {
+      icon: (
+        <Mail
+          className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600 dark:text-indigo-400 mt-0.5"
+          aria-hidden="true"
+        />
+      ),
+      title: "Email",
+      content: contactData.email,
+    },
+    {
+      icon: (
+        <Phone
+          className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600 dark:text-indigo-400 mt-0.5"
+          aria-hidden="true"
+        />
+      ),
+      title: "Teléfono",
+      content: contactData.phone,
+    },
+  ];
 
-const ContactInfoCard = () => (
-  <motion.div
-    initial={{ opacity: 0, x: -20 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.5 }}
-    viewport={{ once: true }}
-  >
-    <Card className="h-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-md hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-105 rounded-2xl">
-      <CardHeader>
-        <CardTitle className="text-xl sm:text-2xl text-slate-900 dark:text-white">
-          Información de contacto
-        </CardTitle>
-        <CardDescription className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
-          Estamos aquí para ayudarte. No dudes en contactarnos por cualquiera de
-          estos medios.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4 sm:space-y-6">
-        {contactInfo.map((info, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="flex items-start space-x-3 sm:space-x-4 group"
-          >
-            <div
-              className="transition-transform duration-300 ease-in-out group-hover:scale-110"
-              aria-hidden="true"
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+    >
+      <Card className="h-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-md hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-105 rounded-2xl">
+        <CardHeader>
+          <CardTitle className="text-xl sm:text-2xl text-slate-900 dark:text-white">
+            Información de contacto
+          </CardTitle>
+          <CardDescription className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+            Estamos aquí para ayudarte. No dudes en contactarnos por cualquiera de
+            estos medios.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4 sm:space-y-6">
+          {dynamicContactInfo.map((info, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="flex items-start space-x-3 sm:space-x-4 group"
             >
-              {info.icon}
-            </div>
-            <div>
-              <h3 className="text-sm sm:text-base font-medium text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
-                {info.title}
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 group-hover:text-indigo-600/80 dark:group-hover:text-indigo-400/80 transition-colors duration-300">
-                {info.content}
-              </p>
-            </div>
-          </motion.div>
-        ))}
-      </CardContent>
-    </Card>
-  </motion.div>
-);
+              <div
+                className="transition-transform duration-300 ease-in-out group-hover:scale-110"
+                aria-hidden="true"
+              >
+                {info.icon}
+              </div>
+              <div>
+                <h3 className="text-sm sm:text-base font-medium text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
+                  {info.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 group-hover:text-indigo-600/80 dark:group-hover:text-indigo-400/80 transition-colors duration-300">
+                  {info.content}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+};
 
 const ContactForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const { toast } = useToast();
@@ -305,7 +307,11 @@ const ContactForm = ({ onSuccess }: { onSuccess: () => void }) => {
   );
 };
 
-export default function Contact() {
+interface ContactProps {
+  config?: any;
+}
+
+export default function Contact({ config }: ContactProps) {
   const [showConfetti, setShowConfetti] = useState(false);
 
   const handleFormSuccess = () => {
@@ -342,7 +348,7 @@ export default function Contact() {
           </p>
         </motion.div>
         <div className="grid gap-4 sm:gap-6 mt-8 sm:mt-12 md:grid-cols-2">
-          <ContactInfoCard />
+          <ContactInfoCard config={config} />
           <ContactForm onSuccess={handleFormSuccess} />
         </div>
       </div>
